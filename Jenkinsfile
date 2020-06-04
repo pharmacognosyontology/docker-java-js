@@ -8,13 +8,17 @@ pipeline {
   stages {
     stage('Building image') {
       steps {
-        docker.build($REGISTRY)
+        script {
+          docker.build($REGISTRY)
+        }
       }
     }
     stage('Push') {
       steps {
-         docker.withRegistry('https://registry.hub.docker.com', 'dockerHub') {
-          docker.image($REGISTRY).push('latest')
+        script {
+          docker.withRegistry('https://registry.hub.docker.com', 'dockerHub') {
+            docker.image($REGISTRY).push('latest')
+          }
         }
       }
     }
