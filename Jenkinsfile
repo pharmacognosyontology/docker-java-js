@@ -9,7 +9,7 @@ pipeline {
     stage('Building image') {
       steps {
         script {
-          docker.build($REGISTRY)
+          def container = docker.build($REGISTRY)
         }
       }
     }
@@ -17,7 +17,7 @@ pipeline {
       steps {
         script {
           docker.withRegistry('https://registry.hub.docker.com', 'dockerHub') {
-            docker.image($REGISTRY).push('latest')
+            container.push('latest')
           }
         }
       }
