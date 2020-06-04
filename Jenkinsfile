@@ -11,7 +11,16 @@ pipeline {
         sh 'docker build -t $REGISTRY .'
       }
     }
-
+    stage('Push') {
+      steps {
+        withCredentials([usernamePassword(credentialsId: 'dockerHub', usernameVariable: 'HUB_USER', passwordVariable: 'HUB_TOKEN')]) {                      
+          sh '''
+            docker login -u $HUB_USER -p $HUB_TOKEN 
+            docker image push $REGISTRY
+          '''
+        }
+      }
+    }
   }
   environment {
     REGISTRY = 'phontology/java-js'
