@@ -14,7 +14,7 @@ pipeline {
 
   }
   environment {
-    registry = 'phontology/java-js'
+    REGISTRY = 'phontology/java-js'
     registryCredential = 'bjonnhDocker'
   }
 }
