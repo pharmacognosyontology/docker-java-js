@@ -2,10 +2,10 @@ pipeline {
   agent {
     node {
       label 'master'
+      def app
     }
 
   }
-  def app
   stages {
     stage('Building image') {
       steps {
