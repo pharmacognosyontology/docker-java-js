@@ -5,19 +5,17 @@ pipeline {
     }
 
   }
+  def app
   stages {
     stage('Building image') {
       steps {
-        sh 'docker build -t $REGISTRY .'
+        app = docker.build($REGISTRY)
       }
     }
     stage('Push') {
       steps {
-        withCredentials([usernamePassword(credentialsId: 'dockerHub', usernameVariable: 'HUB_USER', passwordVariable: 'HUB_TOKEN')]) {                      
-          sh '''
-            docker login -u $HUB_USER -p $HUB_TOKEN 
-            docker image push $REGISTRY
-          '''
+         docker.withRegistry('https://registry.hub.docker.com', 'dockerHub') {
+          app.push('latest')
         }
       }
     }
