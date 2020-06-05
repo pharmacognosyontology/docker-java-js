@@ -10,7 +10,7 @@ pipeline {
     stage('Building image') {
       steps {
         script {
-          def container = docker.build($REGISTRY)
+          def container = docker.build(REGISTRY)
         }
       }
     }
