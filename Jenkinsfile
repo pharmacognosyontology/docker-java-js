@@ -10,7 +10,7 @@ pipeline {
     stage('Building image') {
       steps {
         script {
-          def container = docker.build(REGISTRY)
+          docker.build(REGISTRY)
         }
       }
     }
@@ -18,7 +18,7 @@ pipeline {
       steps {
         script {
           docker.withRegistry('https://registry.hub.docker.com', 'dockerHub') {
-            container.push('latest')
+            docker.image(REGISTRY).push('latest')
           }
         }
       }
