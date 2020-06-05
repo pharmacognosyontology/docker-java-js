@@ -1,3 +1,4 @@
+def REGISTRY = 'phontology/java-js'
 pipeline {
   agent {
     node {
@@ -22,9 +23,5 @@ pipeline {
         }
       }
     }
-  }
-  environment {
-    REGISTRY = 'phontology/java-js'
-    registryCredential = 'bjonnhDocker'
   }
 }
